@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometric Ratios in the Unit Circle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #input-field {
+            margin-bottom: 10px;
+        }
+        #unit-circle {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            border-radius: 50%;
+            position: relative;
+        }
+        #point {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: red;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+        #angle-label {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        #output-table {
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        #output-table td {
+            padding: 5px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Trigonometric Ratios in the Unit Circle</h1>
+        <p>Enter an angle (in degrees):</p>
+        <input type="number" id="angle-input" placeholder="Enter angle">
+        <button onclick="calculate()">Calculate</button>
+        <div id="unit-circle"></div>
+        <p id="angle-label"></p>
+        <table id="output-table">
+            <tr>
+                <td><b>Sin</b></td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><b>Cos</b></td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td><b>Tan</b></td>
+                <td>-</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function calculate() {
+            let angle = document.getElementById("angle-input").value;
+            let radians = angle * Math.PI / 180;
+            let sin = Math.sin(radians);
+            let cos = Math.cos(radians);
+            let tan = Math.tan(radians);
+
+            // Update unit circle
+            let pointX = cos * 100;
+            let pointY = sin * 100;
+            let pointElement = document.getElementById("point");
+            pointElement.style.left = `${50 + pointX}%`;
+            pointElement.style.top = `${50 - pointY}%`;
+            document.getElementById("angle-label").innerText = `${angle}°`;
+
+            // Update output table
+            document.getElementById("output-table").rows[0].cells[1].innerText = sin.toFixed(2);
+            document.getElementById("output-table").rows[1].cells[1].innerText = cos.toFixed(2);
+            document.getElementById("output-table").rows[2].cells[1].innerText = tan.toFixed(2);
+        }
+    </script>
+</body>
+</html>
